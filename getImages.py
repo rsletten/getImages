@@ -34,8 +34,7 @@ def main():
     dayStart = int(sys.argv[1])
     dayEnd = int(sys.argv[2])
     for days in range (dayStart, dayEnd):
-        image_range = datetime.datetime.now() - datetime.timedelta(days)
-        image_name = image_range.strftime("%Y-%m-%d")
+        image_name = get_days(days)
         filepath = pathlib.Path('screenshots/%s.png' % image_name)
         if filepath.exists():
             print("%s exists" % filepath)
@@ -43,6 +42,11 @@ def main():
             get_image(image_name)
             print("Downloaded %s" % image_name)
     print("Finished!")
+
+def get_days(days):
+    image_range = datetime.datetime.now() - datetime.timedelta(days)
+    image_name = image_range.strftime("%Y-%m-%d")
+    return image_name
 
 if __name__ == "__main__":
     main()
